@@ -749,14 +749,17 @@ textarea { resize: vertical; min-height: 130px; }
   color: rgba(255,255,255,.7);
   margin-bottom: 12px;
 }
+
+/* ---- Footer bottom : centré ---- */
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,.1);
   padding-top: 24px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
 }
 .footer-bottom p { font-size: 13px; color: rgba(255,255,255,.4); }
 .footer-bottom a { color: rgba(255,255,255,.6); transition: var(--trans); }
@@ -823,23 +826,98 @@ textarea { resize: vertical; min-height: 130px; }
   transform: translateY(0);
 }
 
-/* ---------- Responsive ---------- */
+/* ============================================
+   RESPONSIVE — Tablette & Mobile
+   ============================================ */
+
+/* Tablette (≤ 900px) */
 @media (max-width: 900px) {
-  .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .hero-stats { justify-content: flex-start; }
+  .hero-grid        { grid-template-columns: 1fr; gap: 40px; }
+  .about-grid       { grid-template-columns: 1fr; gap: 40px; }
+  .contact-grid     { grid-template-columns: 1fr; }
+  .hero-visual      { display: none; }
+  .footer-grid      { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .hero-stats       { justify-content: flex-start; }
+
+  .about-img-wrap   { height: 320px; }
 }
+
+/* Mobile (≤ 768px) */
 @media (max-width: 768px) {
+  /* Navbar */
   .nav-links, .lang-switch { display: none; }
   .hamburger { display: flex; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .section { padding: 60px 0; }
+
+  /* Sections */
+  .section { padding: 56px 0; }
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding-top: 88px;
+    padding-bottom: 56px;
+  }
+  .hero-name    { font-size: clamp(30px, 8vw, 42px); }
+  .hero-title   { font-size: 15px; }
+  .hero-slogan  { font-size: 15px; }
+  .hero-desc    { font-size: 15px; margin-bottom: 28px; }
+  .hero-btns    { flex-direction: column; }
+  .hero-btns .btn { justify-content: center; width: 100%; }
+  .hero-stats   { gap: 20px; flex-wrap: wrap; }
+  .stat-num     { font-size: 24px; }
+
+  /* Grilles */
+  .services-grid    { grid-template-columns: 1fr; }
+  .portfolio-grid   { grid-template-columns: 1fr; }
+  .why-grid         { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .footer-grid      { grid-template-columns: 1fr; gap: 28px; }
+
+  /* About */
+  .about-img-wrap { height: 260px; }
+  .about-badge    { font-size: 11px; padding: 8px 12px; }
+
+  /* Portfolio */
+  .portfolio-row  { grid-template-columns: 1fr; }
+
+  /* Contact form */
+  .form-row       { grid-template-columns: 1fr; }
+  .contact-form   { padding: 24px 20px; }
+
+  /* Footer */
+  .footer         { padding: 44px 0 24px; }
+  .footer-bottom  { gap: 6px; }
+  .footer-bottom p { font-size: 12px; }
+
+  /* Page hero */
+  .page-hero      { padding: 100px 0 48px; }
+  .page-hero h1   { font-size: clamp(26px, 7vw, 38px); }
+  .page-hero p    { font-size: 15px; }
 }
+
+/* Petit mobile (≤ 480px) */
 @media (max-width: 480px) {
-  .hero-btns { flex-direction: column; }
-  .hero-btns .btn { justify-content: center; }
+  .container      { padding: 0 16px; }
+  .section-title  { font-size: clamp(22px, 6vw, 30px); }
+  .section-sub    { font-size: 15px; }
+
+  .btn            { padding: 12px 20px; font-size: 14px; }
+
+  .why-grid       { grid-template-columns: 1fr; }
+  .hero-stats     { justify-content: space-between; }
+
+  .service-card   { padding: 20px; }
+  .service-icon   { width: 44px; height: 44px; font-size: 20px; }
+
+  .portfolio-img  { height: 160px; }
+
+  .wa-float       { bottom: 16px; right: 16px; width: 50px; height: 50px; }
+  .wa-float svg   { width: 24px; height: 24px; }
+
+  .contact-form   { padding: 20px 16px; }
+
+  .footer-grid    { gap: 20px; }
+  .footer-brand p { max-width: 100%; }
+  .timeline       { padding-left: 18px; }
 }
 
 /* ---------- Notification Toast ---------- */
@@ -857,6 +935,7 @@ textarea { resize: vertical; min-height: 130px; }
   transform: translateX(200px);
   opacity: 0;
   transition: var(--trans);
+  max-width: calc(100vw - 56px);
 }
 .toast.show { transform: translateX(0); opacity: 1; }
 .toast.success { border-left: 4px solid #22c55e; }
